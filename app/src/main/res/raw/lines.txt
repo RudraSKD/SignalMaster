@@ -1,0 +1,10 @@
+The quick brown fox jumps over the lazy dog.
+Hello, world!
+Learn semaphore through this game.
+Coding is fun.
+Enjoy the challenge!
+This is a random line.
+Guess the correct line!
+You are doing great.
+Keep going!
+The answer is hidden here.
