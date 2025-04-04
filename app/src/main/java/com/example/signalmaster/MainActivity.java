@@ -8,6 +8,7 @@ import android.os.Handler;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -29,27 +30,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        SharedPreferences prefs = getSharedPreferences("MyPrefs", MODE_PRIVATE);
-        boolean isFirstTime = prefs.getBoolean("isFirstTime", true);  // Default = true
-
-        if (isFirstTime) {
-            // Redirect to OnboardingActivity for first-time users
-            startActivity(new Intent(this, onBoardActivity.class));
-            finish();  // Close MainActivity so it doesn't stay in the back stack
-
-            // Update SharedPreferences so this doesn't happen again
-            prefs.edit().putBoolean("isFirstTime", false).apply();
-            return;  // Exit onCreate() early
-        }
-
-        setContentView(R.layout.activity_main); // Load UI only for returning users
-
         // Hide navigation bar
         hideSystemUI();
 
         // Initialize UI elements
         semaphoreImage = findViewById(R.id.semaphoreImage);
-        lockIcon = findViewById(R.id.lockIcon);
         Button btnLearn = findViewById(R.id.btnLearn);
         Button btnLetterGuess = findViewById(R.id.btnLetterGuess);
         Button btnWordGuess = findViewById(R.id.btnWordGuess);
@@ -64,7 +49,6 @@ public class MainActivity extends AppCompatActivity {
         btnWordGuess.setOnClickListener(v -> openWordIdentificationActivity());
         btnLineGuess.setOnClickListener(v -> openLineIdentificationActivity());
     }
-
     // Function to hide navigation bar
     private void hideSystemUI() {
         View decorView = getWindow().getDecorView();
@@ -96,7 +80,6 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(MainActivity.this, LetterIdentificationActivity.class);
         startActivity(intent);
     }
-
     // Function to alternate semaphore images every 2 seconds
     private void startImageAnimation() {
         handler.postDelayed(new Runnable() {
@@ -126,10 +109,8 @@ public class MainActivity extends AppCompatActivity {
             return false; // Keep it locked
         }
     }
-
     private int getWordScore() {
         SharedPreferences prefs = getSharedPreferences("GamePrefs", MODE_PRIVATE);
-        return prefs.getInt("word_guessing_total", 0); // Default is 0
+        return prefs.getInt("TotalScores", 0); // Default is 0
     }
-
 }

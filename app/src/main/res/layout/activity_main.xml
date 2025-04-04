@@ -67,73 +67,71 @@
         app:cardCornerRadius="25dp"
         android:background="@android:color/transparent"> <!-- Curved border -->
 
+        <ImageView
+            android:id="@+id/semaphoreImage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:contentDescription="Semaphore Animation"
+            android:background="@android:color/transparent"/>
 
-    <ImageView
-        android:id="@+id/semaphoreImage"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="centerCrop"
-        android:contentDescription="Semaphore Animation"
-        android:background="@android:color/transparent"/>
-</androidx.cardview.widget.CardView>
+    </androidx.cardview.widget.CardView>
 
     <!-- Buttons Container -->
-<LinearLayout
-android:id="@+id/buttonContainer"
-android:layout_width="wrap_content"
-android:layout_height="wrap_content"
-android:gravity="center"
-android:orientation="vertical"
-android:layout_marginTop="20dp"
-app:layout_constraintTop_toBottomOf="@id/semaphoreCard"
-app:layout_constraintBottom_toBottomOf="parent"
-app:layout_constraintEnd_toEndOf="parent"
-app:layout_constraintStart_toStartOf="parent"
-app:layout_constraintVertical_bias="0.80">
-
-<!-- Buttons with uniform size & spacing -->
-<Button
-    android:id="@+id/btnLearn"
-    android:layout_width="250dp"
+    <LinearLayout
+    android:id="@+id/buttonContainer"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="Semaphore Training"
-    android:layout_marginTop="10dp" />
+    android:gravity="center"
+    android:orientation="vertical"
+    android:layout_marginTop="20dp"
+    app:layout_constraintTop_toBottomOf="@id/semaphoreCard"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintVertical_bias="0.80">
 
-<Button
-    android:id="@+id/btnLetterGuess"
-    android:layout_width="250dp"
-    android:layout_height="wrap_content"
-    android:text="Letter Identification"
-    android:layout_marginTop="10dp" />
+    <!-- Buttons with uniform size & spacing -->
+        <Button
+            android:id="@+id/btnLearn"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:text="Semaphore Training"
+            android:layout_marginTop="10dp" />
 
-<Button
-    android:id="@+id/btnWordGuess"
-    android:layout_width="250dp"
-    android:layout_height="wrap_content"
-    android:text="Guess the Word"
-    android:layout_marginTop="10dp" />
+        <Button
+            android:id="@+id/btnLetterGuess"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:text="Letter Identification"
+            android:layout_marginTop="10dp" />
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/btnWordGuess"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:text="Guess the Word"
+            android:layout_marginTop="10dp" />
 
-<Button
-    android:id="@+id/btnLineGuess"
-    android:layout_width="250dp"
-    android:layout_height="wrap_content"
-    android:text="Decode the Line"
-    android:layout_marginTop="10dp" />
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/lockIcon"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/lock"
-            android:layout_centerInParent="true"
-            android:layout_marginTop="30dp" />
+            <Button
+                android:id="@+id/btnLineGuess"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:text="Decode the Line"
+                android:layout_marginTop="10dp" />
 
-    </RelativeLayout>
+            <ImageView
+                android:id="@+id/lockIcon"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/lock"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="30dp" />
 
-</LinearLayout>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        </RelativeLayout>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

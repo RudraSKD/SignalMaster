@@ -30,11 +30,12 @@ public class LineIdentificationActivity extends AppCompatActivity {
     private String currentLine = "";
     private int score = 0; // Initialize score
     final private Handler handler = new Handler(); // Used for delay
+    private Runnable displayRunnable;
     MediaPlayer startSound;
     MediaPlayer correctSound;
     private ArrayList<String> linesList = new ArrayList<>();
     private int currentLetterIndex = 0;
-    private int wordHighScore = 0; // Stores the high score
+    private int lineHighScore = 0; // Stores the high score
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,8 +52,8 @@ public class LineIdentificationActivity extends AppCompatActivity {
         highScoreText = findViewById(R.id.highScoreText);
 
         // Load and display the high score
-        wordHighScore = getHighScore("line_guessing");
-        highScoreText.setText("High Score: " + wordHighScore);
+        lineHighScore = getHighScore("line_guessing");
+        highScoreText.setText("High Score: " + lineHighScore);
 
         // Set initial image as "space"
         letterImage.setImageResource(R.drawable.space); // Ensure 'space.png' is in res/drawable
@@ -87,7 +88,8 @@ public class LineIdentificationActivity extends AppCompatActivity {
         replayButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                replayLine(); // Call function to restart line display
+                currentLetterIndex = 0;
+                displayLineImages(); // Call function to restart line display
             }
         });
     }
@@ -102,10 +104,6 @@ public class LineIdentificationActivity extends AppCompatActivity {
                         | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
                         | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
         );
-    }
-    private void replayLine() {
-        handler.removeCallbacksAndMessages(null); // Stop any ongoing line display
-        displayLineImages(); // Restart line display
     }
     private void playStartSound() {
         if (startSound != null) {
@@ -170,13 +168,13 @@ public class LineIdentificationActivity extends AppCompatActivity {
         if (guessedLine.equals(currentLine)) {
             score++; // Increase score on correct answer
 
-            if (score > wordHighScore) {
-                wordHighScore = score;
-                saveHighScore("line_guessing", wordHighScore);
-                highScoreText.setText("High Score: " + wordHighScore);
+            if (score > lineHighScore) {
+                lineHighScore = score;
+                saveHighScore("line_guessing", lineHighScore);
+                highScoreText.setText("High Score: " + lineHighScore);
             }
             playCorrectSound();
-            currentScoreText.setText(String.valueOf(score));
+            currentScoreText.setText("Current Score: "+ score);
             Toast.makeText(this, "Correct!", Toast.LENGTH_SHORT).show();
             // Delay for 2 seconds, then reset color and generate new letter
             handler.postDelayed(this::startNewLine, 3000);
@@ -297,9 +295,11 @@ public class LineIdentificationActivity extends AppCompatActivity {
     }
 
     private void displayLineImages() {
-        currentLetterIndex = 0; // Reset index before starting again
-        handler.postDelayed(new Runnable() {
-
+        // Cancel any previous running callbacks
+        if (displayRunnable != null) {
+            handler.removeCallbacks(displayRunnable);
+        }
+        displayRunnable = new Runnable() {
             @Override
             public void run() {
                 if (currentLetterIndex < currentLine.length()) {
@@ -313,9 +313,12 @@ public class LineIdentificationActivity extends AppCompatActivity {
                     letterImage.setImageResource(imageId);
                     currentLetterIndex++;
                     handler.postDelayed(this, 3000); // 3-second delay for each letter
+                }else {
+                    // Optionally reset or show something else when the line is done
+                    letterImage.setImageResource(R.drawable.space); // Clear with space
                 }
-                letterImage.setImageResource(R.drawable.space);
             }
-        }, 3000);
+        };
+        handler.post(displayRunnable); // Start immediately or add a delay if you want
     }
 }

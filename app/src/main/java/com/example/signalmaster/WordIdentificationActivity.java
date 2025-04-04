@@ -30,6 +30,7 @@ public class WordIdentificationActivity extends AppCompatActivity {
     private String currentWord = "";
     private int score = 0; // Initialize score
     final private Handler handler = new Handler(); // Used for delay
+    private Runnable displayRunnable;
     MediaPlayer startSound;
     MediaPlayer correctSound;
     private ArrayList<String> wordsList = new ArrayList<>();
@@ -306,7 +307,11 @@ public class WordIdentificationActivity extends AppCompatActivity {
     }
 
     private void displayWordImages() {
-        handler.postDelayed(new Runnable() {
+        // Cancel any previous running callbacks
+        if (displayRunnable != null) {
+            handler.removeCallbacks(displayRunnable);
+        }
+        displayRunnable = new Runnable() {
             @Override
             public void run() {
                 if (currentLetterIndex < currentWord.length()) {
@@ -320,6 +325,7 @@ public class WordIdentificationActivity extends AppCompatActivity {
                     letterImage.setImageResource(R.drawable.space);
                 }
             }
-        }, 3000);
+        };
+        handler.post(displayRunnable);
     }
 }
