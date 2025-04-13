@@ -128,12 +128,13 @@ public class LineIdentificationActivity extends AppCompatActivity {
     }
 
     private void stopGame() {
+        lineInput.setText("Enter the line");
+        lineInput.setTextColor(Color.WHITE);
         isGameRunning = false; // Stop game state
         handler.removeCallbacksAndMessages(null); // Stop image display
         startButton.setText("Play"); // Reset play button text
         letterImage.setImageResource(R.drawable.space); // Reset image
         userInput.setLength(0); // Clear input
-        lineInput.setText(generateUnderscores(currentLine.length())); // Reset word display
         currentScoreText.setText("Current Score: 0");
     }
 

@@ -3,6 +3,8 @@ package com.example.signalmaster;
 import android.os.Bundle;
 import android.view.View;
 import androidx.gridlayout.widget.GridLayout;
+
+import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -52,6 +54,13 @@ public class SemaphoreTrainingActivity extends AppCompatActivity {
         ImageButton prevButton = findViewById(R.id.prevButton);
         ImageButton nextButton = findViewById(R.id.nextButton);
 
+        int columns = 3;
+        semaphoreGrid.setColumnCount(columns);
+
+        // Calculate image size based on screen width
+        int screenWidth = getResources().getDisplayMetrics().widthPixels;
+        int imageSize = screenWidth / columns - 40; // margin offset
+
         // Dynamically add images and letters to the grid
         for (int i = 0; i < semaphoreImages.length; i++) {
             final int index = i;
@@ -63,12 +72,17 @@ public class SemaphoreTrainingActivity extends AppCompatActivity {
             itemLayout.setLayoutParams(new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.WRAP_CONTENT,
                     LinearLayout.LayoutParams.WRAP_CONTENT));
-            itemLayout.setPadding(16, 16, 16, 16);
+            itemLayout.setPadding(10, 10, 10, 10);
 
             // Image setup
             ImageView imageView = new ImageView(this);
-            imageView.setLayoutParams(new LinearLayout.LayoutParams(200, 200));
+            GridLayout.LayoutParams params = new GridLayout.LayoutParams();
+            params.width = imageSize;
+            params.height = imageSize;
+            params.setMargins(10, 10, 10, 10);
+            imageView.setLayoutParams(params);
             imageView.setImageResource(semaphoreImages[i]);
+            imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
             imageView.setAdjustViewBounds(true);
             imageView.setOnClickListener(v -> showPopup(index));
 

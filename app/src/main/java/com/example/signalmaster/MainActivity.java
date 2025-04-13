@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class MainActivity extends AppCompatActivity {
 
     private ImageView semaphoreImage, lockIcon;
+    int wordScore;
     final private Handler handler = new Handler();
     final private int[] images = {
             R.drawable.space, R.drawable.a, R.drawable.b, R.drawable.c,
@@ -39,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
         Button btnLetterGuess = findViewById(R.id.btnLetterGuess);
         Button btnWordGuess = findViewById(R.id.btnWordGuess);
         Button btnLineGuess = findViewById(R.id.btnLineGuess);
+        lockIcon = findViewById(R.id.lockIcon); // ✅ Add this line
 
         // Start alternating images
         startImageAnimation();
@@ -48,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
         btnLetterGuess.setOnClickListener(v -> openLetterIdentificationActivity());
         btnWordGuess.setOnClickListener(v -> openWordIdentificationActivity());
         btnLineGuess.setOnClickListener(v -> openLineIdentificationActivity());
+        updateLockState();
     }
     // Function to hide navigation bar
     private void hideSystemUI() {
@@ -65,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this, LineIdentificationActivity.class);
             startActivity(intent);
         } else {
-            Toast.makeText(this, "Score 50+ in Word Guessing to unlock!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Score 50+ in Word Guessing to unlock!\nYour current score is: "+wordScore, Toast.LENGTH_SHORT).show();
         }
     }
     private void openWordIdentificationActivity() {
@@ -94,23 +97,32 @@ public class MainActivity extends AppCompatActivity {
         }, 2000);
     }
     private boolean checkAndUnlockDecodeLine() {
-        int wordScore = getWordScore();
-        Button decodeLineButton = findViewById(R.id.btnLineGuess);
+        wordScore = getWordScore();
 
         if (wordScore >= 5) {
-            decodeLineButton.setEnabled(true);  // Unlock the mode
-            decodeLineButton.setAlpha(1.0f);    // Make it fully visible
-            lockIcon.setVisibility(View.GONE); // Remove lock icon
-            return true; // Unlock the mode
+            return true;
         } else {
-            decodeLineButton.setEnabled(false); // Keep it locked
-            decodeLineButton.setAlpha(0.5f);    // Make button look disabled
-            lockIcon.setVisibility(View.VISIBLE); // Show lock icon
-            return false; // Keep it locked
+            Toast.makeText(this, "Score 50+ in Word Guessing to unlock!\nYour current score is: " + wordScore, Toast.LENGTH_SHORT).show();
+            return false;
         }
     }
     private int getWordScore() {
-        SharedPreferences prefs = getSharedPreferences("GamePrefs", MODE_PRIVATE);
-        return prefs.getInt("TotalScores", 0); // Default is 0
+        SharedPreferences prefs = getSharedPreferences("TotalScores", MODE_PRIVATE);
+        return prefs.getInt("word_guessing_total", 0); // Default is 0
     }
+    private void updateLockState() {
+        wordScore = getWordScore();
+        Button decodeLineButton = findViewById(R.id.btnLineGuess);
+
+        if (wordScore >= 3) {
+            decodeLineButton.setEnabled(true);
+            decodeLineButton.setAlpha(1.0f);
+            lockIcon.setVisibility(View.GONE);
+        } else {
+            decodeLineButton.setEnabled(true);
+            decodeLineButton.setAlpha(1.0f);
+            lockIcon.setVisibility(View.VISIBLE);
+        }
+    }
+
 }

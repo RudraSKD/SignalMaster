@@ -183,6 +183,10 @@ public class LetterIdentificationActivity extends AppCompatActivity {
             TextView letterView = findViewById(id);
             if (letterView != null) {
                 letterView.setOnClickListener(view -> {
+                    if (!isGameRunning) {
+                        Toast.makeText(this, "Press Play to start!", Toast.LENGTH_SHORT).show();
+                        return; // Stop processing input if game is not running
+                    }
                     String selectedLetter = ((TextView) view).getText().toString();
                     checkAnswer((TextView) view, selectedLetter); // Validate the answer
                 });

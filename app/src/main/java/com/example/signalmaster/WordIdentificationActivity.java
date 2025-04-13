@@ -128,12 +128,13 @@ public class WordIdentificationActivity extends AppCompatActivity {
     }
 
     private void stopGame() {
+        wordInput.setText("Enter the line");
+        wordInput.setTextColor(Color.WHITE);
         isGameRunning = false; // Stop game state
         handler.removeCallbacksAndMessages(null); // Stop image display
         startButton.setText("Play"); // Reset play button text
         letterImage.setImageResource(R.drawable.space); // Reset image
         userInput.setLength(0); // Clear input
-        wordInput.setText(generateUnderscores(currentWord.length())); // Reset word display
         currentScoreText.setText("Current Score: 0");
     }
 

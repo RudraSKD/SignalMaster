@@ -19,14 +19,10 @@
         <LinearLayout
             android:id="@+id/app"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="70dp"
             android:orientation="horizontal"
-            android:gravity="center_vertical"
+            android:gravity="center"
             android:background="@android:color/holo_blue_light"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:paddingLeft="42dp"
-            android:paddingRight="41dp"
             android:elevation="10dp">
 
             <!-- Small Logo Image -->
@@ -44,7 +40,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="SignalMaster"
-                android:textSize="32sp"
+                android:textSize="28sp"
                 android:textStyle="bold"
                 android:textColor="@color/black"/>
         </LinearLayout>
@@ -64,13 +60,16 @@
                 app:alignmentMode="alignMargins"
                 app:useDefaultMargins="true"
                 app:columnCount="3"
-                android:padding="5dp"/>
+                android:paddingLeft="0dp"
+                android:paddingBottom="5dp"
+                android:paddingTop="5dp"
+                android:paddingRight="8dp"/>
         </ScrollView>
 
         <!-- Hidden Pop-up View -->
         <androidx.cardview.widget.CardView
             android:id="@+id/popUpContainer"
-            android:layout_width="300dp"
+            android:layout_width="match_parent"
             android:layout_height="350dp"
             android:visibility="gone"
             app:cardCornerRadius="12dp"

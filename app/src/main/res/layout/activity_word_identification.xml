@@ -8,25 +8,23 @@
     tools:context=".LetterIdentificationActivity"
     android:background="@drawable/background_gradient">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:gravity="center_horizontal">
+        android:gravity="center">
 
         <!-- App Header (Title & Logo) -->
         <LinearLayout
             android:id="@+id/app"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="70dp"
             android:orientation="horizontal"
-            android:gravity="center_vertical"
+            android:gravity="center"
             android:background="@android:color/holo_blue_light"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:paddingLeft="42dp"
-            android:paddingRight="41dp"
-            android:elevation="10dp">
+            android:elevation="10dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
 
             <!-- Small Logo Image -->
             <ImageView
@@ -43,21 +41,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="SignalMaster"
-                android:textSize="32sp"
+                android:textSize="28sp"
                 android:textStyle="bold"
                 android:textColor="@color/black"/>
         </LinearLayout>
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:fillViewport="true"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/appTitle">
+            app:layout_constraintTop_toBottomOf="@id/app">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:gravity="center">
 
@@ -70,10 +68,11 @@
                     android:textSize="24sp"
                     android:textStyle="bold"
                     android:gravity="center"
+                    android:layout_marginTop="80dp"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    android:paddingTop="16dp"/>
+                    android:padding="16dp"/>
 
                 <!-- Score Display -->
                 <LinearLayout
@@ -83,7 +82,7 @@
                     android:layout_centerHorizontal="true"
                     android:orientation="horizontal"
                     android:gravity="center"
-                    android:layout_marginTop="11dp"
+                    android:layout_marginTop="2dp"
                     app:layout_constraintTop_toBottomOf="@id/title"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent">
@@ -94,7 +93,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Current Score: 0"
-                        android:textSize="18sp"
+                        android:textSize="15sp"
                         android:textColor="@android:color/black"
                         app:layout_constraintTop_toBottomOf="@id/title"
                         app:layout_constraintStart_toStartOf="parent"
@@ -105,7 +104,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="High Score: 0"
-                        android:textSize="18sp"
+                        android:textSize="15sp"
                         android:textColor="@android:color/black"
                         app:layout_constraintTop_toBottomOf="@id/title"
                         app:layout_constraintStart_toStartOf="parent"
@@ -182,6 +181,18 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"/>
 
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="-25dp">
+            <LinearLayout
+                android:id="@+id/keyboardWrapper"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent">
+
                 <!-- QWERTY Keyboard Layout -->
                 <GridLayout
                     android:id="@+id/keyboardLayout_1"
@@ -202,7 +213,7 @@
                     <TextView
                         android:id="@+id/key_q"
                         android:layout_width="0dp"
-                        android:layout_height="40dp"
+                        android:layout_height="wrap_content"
                         android:layout_columnWeight="1"
                         android:text="Q"
                         android:textSize="18sp"
@@ -216,7 +227,7 @@
                     <TextView
                         android:id="@+id/key_w"
                         android:layout_width="0dp"
-                        android:layout_height="40dp"
+                        android:layout_height="wrap_content"
                         android:layout_columnWeight="1"
                         android:text="W"
                         android:textSize="18sp"
@@ -224,13 +235,16 @@
                         android:background="@android:color/white"
                         android:clickable="true"
                         android:focusable="true"
-                        android:padding="8dp"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp"
+                        android:paddingRight="5dp"
+                        android:paddingLeft="5dp"
                         android:layout_margin="1dp"/>
 
                     <TextView
                         android:id="@+id/key_e"
                         android:layout_width="0dp"
-                        android:layout_height="40dp"
+                        android:layout_height="wrap_content"
                         android:layout_columnWeight="1"
                         android:text="E"
                         android:textSize="18sp"
@@ -244,7 +258,7 @@
                     <TextView
                         android:id="@+id/key_r"
                         android:layout_width="0dp"
-                        android:layout_height="40dp"
+                        android:layout_height="wrap_content"
                         android:layout_columnWeight="1"
                         android:text="R"
                         android:textSize="18sp"
@@ -258,7 +272,7 @@
                     <TextView
                         android:id="@+id/key_t"
                         android:layout_width="0dp"
-                        android:layout_height="40dp"
+                        android:layout_height="wrap_content"
                         android:layout_columnWeight="1"
                         android:text="T"
                         android:textSize="18sp"
@@ -272,7 +286,7 @@
                     <TextView
                         android:id="@+id/key_y"
                         android:layout_width="0dp"
-                        android:layout_height="40dp"
+                        android:layout_height="wrap_content"
                         android:layout_columnWeight="1"
                         android:text="Y"
                         android:textSize="18sp"
@@ -286,7 +300,7 @@
                     <TextView
                         android:id="@+id/key_u"
                         android:layout_width="0dp"
-                        android:layout_height="40dp"
+                        android:layout_height="wrap_content"
                         android:layout_columnWeight="1"
                         android:text="U"
                         android:textSize="18sp"
@@ -300,7 +314,7 @@
                     <TextView
                         android:id="@+id/key_i"
                         android:layout_width="0dp"
-                        android:layout_height="40dp"
+                        android:layout_height="wrap_content"
                         android:layout_columnWeight="1"
                         android:text="I"
                         android:textSize="18sp"
@@ -314,7 +328,7 @@
                     <TextView
                         android:id="@+id/key_o"
                         android:layout_width="0dp"
-                        android:layout_height="40dp"
+                        android:layout_height="wrap_content"
                         android:layout_columnWeight="1"
                         android:text="O"
                         android:textSize="18sp"
@@ -328,7 +342,7 @@
                     <TextView
                         android:id="@+id/key_p"
                         android:layout_width="0dp"
-                        android:layout_height="40dp"
+                        android:layout_height="wrap_content"
                         android:layout_columnWeight="1"
                         android:text="P"
                         android:textSize="18sp"
@@ -360,7 +374,7 @@
                     <TextView
                         android:id="@+id/key_a"
                         android:layout_width="0dp"
-                        android:layout_height="40dp"
+                        android:layout_height="wrap_content"
                         android:layout_columnWeight="1"
                         android:text="A"
                         android:textSize="18sp"
@@ -374,7 +388,7 @@
                     <TextView
                         android:id="@+id/key_s"
                         android:layout_width="0dp"
-                        android:layout_height="40dp"
+                        android:layout_height="wrap_content"
                         android:layout_columnWeight="1"
                         android:text="S"
                         android:textSize="18sp"
@@ -388,7 +402,7 @@
                     <TextView
                         android:id="@+id/key_d"
                         android:layout_width="0dp"
-                        android:layout_height="40dp"
+                        android:layout_height="wrap_content"
                         android:layout_columnWeight="1"
                         android:text="D"
                         android:textSize="18sp"
@@ -402,7 +416,7 @@
                     <TextView
                         android:id="@+id/key_f"
                         android:layout_width="0dp"
-                        android:layout_height="40dp"
+                        android:layout_height="wrap_content"
                         android:layout_columnWeight="1"
                         android:text="F"
                         android:textSize="18sp"
@@ -416,7 +430,7 @@
                     <TextView
                         android:id="@+id/key_g"
                         android:layout_width="0dp"
-                        android:layout_height="40dp"
+                        android:layout_height="wrap_content"
                         android:layout_columnWeight="1"
                         android:text="G"
                         android:textSize="18sp"
@@ -430,7 +444,7 @@
                     <TextView
                         android:id="@+id/key_h"
                         android:layout_width="0dp"
-                        android:layout_height="40dp"
+                        android:layout_height="wrap_content"
                         android:layout_columnWeight="1"
                         android:text="H"
                         android:textSize="18sp"
@@ -444,7 +458,7 @@
                     <TextView
                         android:id="@+id/key_j"
                         android:layout_width="0dp"
-                        android:layout_height="40dp"
+                        android:layout_height="wrap_content"
                         android:layout_columnWeight="1"
                         android:text="J"
                         android:textSize="18sp"
@@ -458,7 +472,7 @@
                     <TextView
                         android:id="@+id/key_k"
                         android:layout_width="0dp"
-                        android:layout_height="40dp"
+                        android:layout_height="wrap_content"
                         android:layout_columnWeight="1"
                         android:text="K"
                         android:textSize="18sp"
@@ -472,7 +486,7 @@
                     <TextView
                         android:id="@+id/key_l"
                         android:layout_width="0dp"
-                        android:layout_height="40dp"
+                        android:layout_height="wrap_content"
                         android:layout_columnWeight="1"
                         android:text="L"
                         android:textSize="18sp"
@@ -502,7 +516,7 @@
                     <TextView
                         android:id="@+id/key_z"
                         android:layout_width="0dp"
-                        android:layout_height="40dp"
+                        android:layout_height="wrap_content"
                         android:layout_columnWeight="1"
                         android:text="Z"
                         android:textSize="18sp"
@@ -516,7 +530,7 @@
                     <TextView
                         android:id="@+id/key_x"
                         android:layout_width="0dp"
-                        android:layout_height="40dp"
+                        android:layout_height="wrap_content"
                         android:layout_columnWeight="1"
                         android:text="X"
                         android:textSize="18sp"
@@ -530,7 +544,7 @@
                     <TextView
                         android:id="@+id/key_c"
                         android:layout_width="0dp"
-                        android:layout_height="40dp"
+                        android:layout_height="wrap_content"
                         android:layout_columnWeight="1"
                         android:text="C"
                         android:textSize="18sp"
@@ -544,7 +558,7 @@
                     <TextView
                         android:id="@+id/key_v"
                         android:layout_width="0dp"
-                        android:layout_height="40dp"
+                        android:layout_height="wrap_content"
                         android:layout_columnWeight="1"
                         android:text="V"
                         android:textSize="18sp"
@@ -558,7 +572,7 @@
                     <TextView
                         android:id="@+id/key_b"
                         android:layout_width="0dp"
-                        android:layout_height="40dp"
+                        android:layout_height="wrap_content"
                         android:layout_columnWeight="1"
                         android:text="B"
                         android:textSize="18sp"
@@ -572,7 +586,7 @@
                     <TextView
                         android:id="@+id/key_n"
                         android:layout_width="0dp"
-                        android:layout_height="40dp"
+                        android:layout_height="wrap_content"
                         android:layout_columnWeight="1"
                         android:text="N"
                         android:textSize="18sp"
@@ -586,7 +600,7 @@
                     <TextView
                         android:id="@+id/key_m"
                         android:layout_width="0dp"
-                        android:layout_height="40dp"
+                        android:layout_height="wrap_content"
                         android:layout_columnWeight="1"
                         android:text="M"
                         android:textSize="18sp"
@@ -600,7 +614,7 @@
                     <TextView
                         android:id="@+id/key_backspace"
                         android:layout_width="0dp"
-                        android:layout_height="40dp"
+                        android:layout_height="wrap_content"
                         android:layout_columnWeight="1"
                         android:text="←"
                         android:textSize="18sp"
@@ -612,11 +626,11 @@
                         android:layout_margin="1dp"/>
 
                 </GridLayout>
-
-
+            </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>
         </ScrollView>
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
