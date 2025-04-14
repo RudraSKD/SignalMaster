@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class MainActivity extends AppCompatActivity {
 
     private ImageView semaphoreImage, lockIcon;
+    private boolean isFirstResume = true;
     int wordScore;
     final private Handler handler = new Handler();
     final private int[] images = {
@@ -52,6 +53,16 @@ public class MainActivity extends AppCompatActivity {
         btnLineGuess.setOnClickListener(v -> openLineIdentificationActivity());
         updateLockState();
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        hideSystemUI();
+        if (checkAndUnlockDecodeLine()) {
+            updateLockState();  // Call this only if unlocked
+        }
+    }
+
     // Function to hide navigation bar
     private void hideSystemUI() {
         View decorView = getWindow().getDecorView();
@@ -102,7 +113,6 @@ public class MainActivity extends AppCompatActivity {
         if (wordScore >= 5) {
             return true;
         } else {
-            Toast.makeText(this, "Score 50+ in Word Guessing to unlock!\nYour current score is: " + wordScore, Toast.LENGTH_SHORT).show();
             return false;
         }
     }
@@ -112,15 +122,9 @@ public class MainActivity extends AppCompatActivity {
     }
     private void updateLockState() {
         wordScore = getWordScore();
-        Button decodeLineButton = findViewById(R.id.btnLineGuess);
-
         if (wordScore >= 3) {
-            decodeLineButton.setEnabled(true);
-            decodeLineButton.setAlpha(1.0f);
             lockIcon.setVisibility(View.GONE);
         } else {
-            decodeLineButton.setEnabled(true);
-            decodeLineButton.setAlpha(1.0f);
             lockIcon.setVisibility(View.VISIBLE);
         }
     }

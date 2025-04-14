@@ -110,6 +110,10 @@ public class SemaphoreTrainingActivity extends AppCompatActivity {
         // Next Button
         nextButton.setOnClickListener(v -> navigateImage(1));
     }
+    protected void onResume() {
+        super.onResume();
+        hideSystemUI();
+    }
 
     // Function to hide navigation bar
     private void hideSystemUI() {

@@ -93,6 +93,10 @@ public class WordIdentificationActivity extends AppCompatActivity {
             }
         });
     }
+    protected void onResume() {
+        super.onResume();
+        hideSystemUI();
+    }
 
     // Function to hide navigation bar
     private void hideSystemUI() {
