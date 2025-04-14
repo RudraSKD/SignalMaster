@@ -14,7 +14,6 @@ import androidx.appcompat.app.AppCompatActivity;
 public class MainActivity extends AppCompatActivity {
 
     private ImageView semaphoreImage, lockIcon;
-    private boolean isFirstResume = true;
     int wordScore;
     final private Handler handler = new Handler();
     final private int[] images = {
