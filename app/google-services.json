@@ -1,36 +1,26 @@
 {
   "project_info": {
-    "project_number": "658891121620",
-    "project_id": "signalmaster-30eec",
-    "storage_bucket": "signalmaster-30eec.firebasestorage.app"
+    "project_number": "252915033103",
+    "project_id": "signalmaster-a46b6",
+    "storage_bucket": "signalmaster-a46b6.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:658891121620:android:a1e41936d1e915706bec41",
+        "mobilesdk_app_id": "1:252915033103:android:100925a19721225aa3ef7a",
         "android_client_info": {
           "package_name": "com.example.signalmaster"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "658891121620-u8uohr8h0t2p0og8b4il00hmclqhm1df.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyBGAJiEfoYvdL-2ZRVbxNTbfBTExRfXrPk"
+          "current_key": "AIzaSyBFjeP-Pz3ZVaEttkHI3E7cvur0emFzeuI"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "658891121620-u8uohr8h0t2p0og8b4il00hmclqhm1df.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     }

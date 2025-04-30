@@ -12,9 +12,11 @@ import java.util.Random;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
@@ -36,6 +38,7 @@ public class WordIdentificationActivity extends AppCompatActivity {
     private ArrayList<String> wordsList = new ArrayList<>();
     private int currentLetterIndex = 0;
     private int wordHighScore = 0; // Stores the high score
+    Spinner delayInput;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,6 +69,18 @@ public class WordIdentificationActivity extends AppCompatActivity {
         // Initialize MediaPlayer with sound effect
         startSound = MediaPlayer.create(this, R.raw.start);
         correctSound = MediaPlayer.create(this, R.raw.correct_answer);
+
+        delayInput = findViewById(R.id.delayInput);
+
+// Create adapter from string-array
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.delay_options, android.R.layout.simple_spinner_item);
+
+// Set dropdown layout
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+// Attach adapter to spinner
+        delayInput.setAdapter(adapter);
 
         // Start Game Button Click
         startButton.setOnClickListener(new View.OnClickListener() {
@@ -312,6 +327,18 @@ public class WordIdentificationActivity extends AppCompatActivity {
     }
 
     private void displayWordImages() {
+        int defaultDelay = 3000; // default
+        int selectedDelay = defaultDelay;
+        try {
+            String selectedDelayString = delayInput.getSelectedItem().toString();
+            if (!selectedDelayString.isEmpty()) {
+                selectedDelay = (Integer.parseInt(selectedDelayString)) * 1000;
+            }
+        }catch (Exception e) {
+            e.printStackTrace(); // keep default
+        }
+        final int delay = selectedDelay; // ✅ make it final for use inside Runnable
+
         // Cancel any previous running callbacks
         if (displayRunnable != null) {
             handler.removeCallbacks(displayRunnable);
@@ -323,8 +350,9 @@ public class WordIdentificationActivity extends AppCompatActivity {
                     char letter = currentWord.charAt(currentLetterIndex);
                     int imageId = getResources().getIdentifier(String.valueOf(letter), "drawable", getPackageName());
                     letterImage.setImageResource(imageId);
+
                     currentLetterIndex++;
-                    handler.postDelayed(this, 3000); // 3-second delay for each letter
+                    handler.postDelayed(this, delay); // 3-second delay for each letter
                 }else {
                     // After displaying all letters, show space image
                     letterImage.setImageResource(R.drawable.space);

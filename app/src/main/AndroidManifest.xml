@@ -16,6 +16,24 @@
         android:theme="@style/Theme.SignalMaster"
         tools:targetApi="31">
         <activity
+            android:name=".LeaderBoard"
+            android:exported="false" />
+        <activity
+            android:name=".Progression"
+            android:exported="false" />
+        <activity
+            android:name=".Profile"
+            android:exported="false" />
+        <activity
+            android:name=".ForgotPassword"
+            android:exported="false" />
+        <activity
+            android:name=".Signup"
+            android:exported="false" />
+        <activity
+            android:name=".Login"
+            android:exported="false" />
+        <activity
             android:name=".LineIdentificationActivity"
             android:exported="false" />
         <activity
